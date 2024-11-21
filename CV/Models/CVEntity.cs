@@ -3,20 +3,20 @@ namespace CV.Models;
 public class CVEntity
 {
 
-    public int id { get; set; }
-    public string first_name { get; set; }
-    public string last_name { get; set; }
-    public string email { get; set; }
-    public string phone_number { get; set; }
-    public string id_number { get; set; }
-    public string education { get; set; }
-    public string gender { get; set; }
-    public string skills { get; set; }
-    public string experience { get; set; }
+    public int Id { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
+    public string ? Email { get; set; }
+    public required string PhoneNumber { get; set; }
+    public required string IdNumber { get; set; }
+    public required string Education { get; set; }
+    public required string Gender { get; set; }
+    public string ? Skills { get; set; }
+    public string ? Experience { get; set; }
 
-    public int fileId { get; set; }
+    public int FileId { get; set; }
 
-    public CV.Models.FilesEntity File { get; set; }
+    public FilesEntity File { get; set; }
 
 
 }

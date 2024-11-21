@@ -2,9 +2,9 @@ namespace CV.Models;
 
 public class FilesEntity
 {
-    public int id { get; set; }
+    public int Id { get; set; }
 
-    public string fileName { get; set; }
+    public required string  FileName { get; set; }
 
-    public ICollection<CV.Models.CVEntity> cvs { get; set; }
+    public required ICollection<CVEntity> Cvs { get; set; }
 }
