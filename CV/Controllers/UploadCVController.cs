@@ -29,7 +29,7 @@ public class UploadCVController : Controller
         try
         {
             var cvEntities = FileToBeUploaded(file);
-            return View("Index");
+            return View("ViewCV", cvEntities);
         }
         catch (Exception e)
         {

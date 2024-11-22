@@ -10,6 +10,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<CVEntity> CV { get; set; }
     public DbSet<FilesEntity> Files { get; set; }
+    public DbSet<RegistrationEntity> Registration { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
