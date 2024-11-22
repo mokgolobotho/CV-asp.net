@@ -34,13 +34,13 @@ namespace CV.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FileId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -70,7 +70,7 @@ namespace CV.Migrations
 
                     b.HasIndex("FileId");
 
-                    b.ToTable("CVEntity");
+                    b.ToTable("CV");
                 });
 
             modelBuilder.Entity("CV.Models.FilesEntity", b =>
@@ -87,7 +87,7 @@ namespace CV.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FilesEntity");
+                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("CV.Models.CVEntity", b =>

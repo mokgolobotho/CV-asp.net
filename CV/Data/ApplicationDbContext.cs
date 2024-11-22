@@ -1,25 +1,25 @@
 namespace CV.Data;
+
 using CV.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options) { }
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-
-    }
-
-    public DbSet<CVEntity> CVEntity { get; set; }
-    public DbSet<FilesEntity> FilesEntity { get; set; }
+    public DbSet<CVEntity> CV { get; set; }
+    public DbSet<FilesEntity> Files { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CVEntity>()
+        modelBuilder
+            .Entity<CVEntity>()
             .HasOne(cv => cv.File)
-            .WithMany(file => file.cvs)
-            .HasForeignKey(cv => cv.fileId);
+            .WithMany(file => file.Cvs)
+            .HasForeignKey(cv => cv.FileId)
+            .IsRequired();
 
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<CVEntity>().Property(cv => cv.FileId).ValueGeneratedOnAdd();
     }
 }
