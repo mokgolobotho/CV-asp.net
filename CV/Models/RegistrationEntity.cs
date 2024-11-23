@@ -8,6 +8,6 @@ public class RegistrationEntity
     public string? Email { get; set; }
     public required string PhoneNumber { get; set; }
     public required string IdNumber { get; set; }
-    public required bool Admin { get; set; }
+    public required bool Admin { get; set; } = false;
     public required string Password { get; set; }
 }

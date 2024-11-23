@@ -85,4 +85,42 @@ public class UploadCVController : Controller
 
         return cvEntities;
     }
+
+    public IActionResult Registration()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Register()
+    {
+        var firstName = Request.Form["FirstName"];
+        var lastName = Request.Form["LastName"];
+        var email = Request.Form["Email"];
+        var phoneNumber = Request.Form["PhoneNumber"];
+        var idNumber = Request.Form["IdNumber"];
+        var password = Request.Form["Password"];
+        var passwordConfirmation = Request.Form["PasswordConfirmation"];
+        Console.Write(password + "  " + passwordConfirmation);
+
+        if (password != passwordConfirmation)
+        {
+            return RedirectToAction("Registration");
+        }
+
+        var model = new RegistrationEntity
+        {
+            FirstName = firstName,
+            LastName = lastName,
+            Email = email,
+            PhoneNumber = phoneNumber,
+            IdNumber = idNumber,
+            Password = password,
+            Admin = false,
+        };
+
+        _db.Registration.Add(model);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }
