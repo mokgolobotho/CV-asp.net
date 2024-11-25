@@ -123,4 +123,19 @@ public class UploadCVController : Controller
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public IActionResult Login(){
+        List<RegistrationEntity> logins = _df.Registration.ToList
+        for (int i = 0; i < logins.Count; i++){
+            RegistrationEntity login = logins[i];
+            var phoneNumber = Request.Form["PhoneNumber"];
+            var password = Request.Form["Password"];
+            if(login.PhoneNumber == phoneNumber && login.Password == password){
+                return RedirectToAction("Index");
+            }else if{
+                return RedirectToAction("Index", "Home");
+            }
+        }
+    }
 }
