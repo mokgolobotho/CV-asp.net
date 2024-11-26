@@ -52,7 +52,7 @@ public class UploadCVController : Controller
         }
         else
         {
-            return RedirectToAction("NoFile");
+            //return RedirectToAction("NoFile");
         }
         return cvEntities;
     }
@@ -111,14 +111,14 @@ public class UploadCVController : Controller
             return RedirectToAction("Registration");
         }
 
-        List<RegistrationEntity> logins = _db.Registration.ToList();
-        for (int i = 0; i < logins.Count; i++)
+        RegistrationEntity login = _db
+            .Registration.ToList()
+            .Where(x => x.PhoneNumber == phoneNumber)
+            .FirstOrDefault();
+
+        if (login != null)
         {
-            RegistrationEntity login = logins[i];
-            if (login.PhoneNumber == phoneNumber)
-            {
-                return RedirectToAction("Registration");
-            }
+            return RedirectToAction("Registration");
         }
 
         var model = new RegistrationEntity
@@ -140,33 +140,33 @@ public class UploadCVController : Controller
     [HttpPost]
     public IActionResult Login()
     {
-        List<RegistrationEntity> logins = _db.Registration.ToList();
+        var phoneNumber = Request.Form["PhoneNumber"];
+        var password = Request.Form["Password"];
+        RegistrationEntity logins = _db
+            .Registration.ToList()
+            .Where(x => x.PhoneNumber == phoneNumber && x.Password == password)
+            .FirstOrDefault();
 
-        for (int i = 0; i < logins.Count; i++)
+        if (logins != null)
         {
-            RegistrationEntity login = logins[i];
-            var phoneNumber = Request.Form["PhoneNumber"];
-            var password = Request.Form["Password"];
-            if (login.PhoneNumber == phoneNumber && login.Password == password)
+            if (logins.Admin == true)
             {
-                if (login.Admin == true)
+                //Console.WriteLine("cvs");
+                var cvEntities = _db.CV.ToList();
+                //Console.WriteLine(cvEntities);
+                foreach (var cv in cvEntities)
                 {
-                    Console.WriteLine("cvs");
-                    var cvEntities = _db.CV.ToList();
-                    Console.WriteLine(cvEntities);
-                    foreach (var cv in cvEntities)
-                    {
-                        Console.WriteLine(cv.FirstName);
-                    }
-                    Console.WriteLine($"Retrieved {cvEntities.Count} records.");
-                    return View("Admin", cvEntities);
+                    Console.WriteLine(cv.FirstName);
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+                Console.WriteLine($"Retrieved {cvEntities.Count} records.");
+                return View("Admin", cvEntities);
+            }
+            else
+            {
+                return RedirectToAction("Index");
             }
         }
+
         return RedirectToAction("Index", "Home");
     }
 }
