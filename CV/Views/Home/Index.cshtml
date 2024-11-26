@@ -8,22 +8,34 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="post" asp-controller="home" asp-action="Login">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input  type="text" name="Username" placeholder="Enter your phone number"/>
-                </div>
-                <div class="form-group mt-3">
-                    <label >Password </label>
-                    <input name="password" type="password" placeholder="Enter your password" style="padding: 0 0 0 15px;"/>
-                </div>
+            <form method="post" asp-controller="UploadCV" asp-action="Login">
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="Username">Username</label>
+                            </td>
+                            <td>
+                                <input type="text" id="Username" name="PhoneNumber" placeholder="Enter your phone number" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Password">Password</label>
+                            </td>
+                            <td>
+                                <input type="password" id="Password" name="password" placeholder="Enter your password" class="form-control" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
             </form>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <a class="nav-link text-dark" asp-area="" asp-controller="UploadCV" asp-action="Registration">Register</a>
+            <a class="btn btn-primary mt-4" asp-area="" asp-controller="UploadCV" asp-action="Registration">Register</a>
         </div>
     </div>
 

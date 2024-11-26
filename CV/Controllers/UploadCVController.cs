@@ -28,7 +28,7 @@ public class UploadCVController : Controller
     {
         try
         {
-            var cvEntities = FileToBeUploaded(file);
+            List<CVEntity> cvEntities = FileToBeUploaded(file);
             return View("ViewCV", cvEntities);
         }
         catch (Exception e)
@@ -40,7 +40,7 @@ public class UploadCVController : Controller
     private List<CVEntity> FileToBeUploaded(IFormFile file)
     {
         string extension = Path.GetExtension(file.FileName);
-        var cvEntities = new List<CVEntity>();
+        List<CVEntity> cvEntities = new List<CVEntity>();
         if (extension.Equals(".xls") || extension.Equals(".csv"))
         {
             string fileName = Guid.NewGuid().ToString() + extension;
@@ -49,6 +49,10 @@ public class UploadCVController : Controller
 
             file.CopyTo(stream);
             cvEntities = SaveCv(file, fileName);
+        }
+        else
+        {
+            return RedirectToAction("NoFile");
         }
         return cvEntities;
     }
@@ -101,11 +105,20 @@ public class UploadCVController : Controller
         var idNumber = Request.Form["IdNumber"];
         var password = Request.Form["Password"];
         var passwordConfirmation = Request.Form["PasswordConfirmation"];
-        Console.Write(password + "  " + passwordConfirmation);
 
         if (password != passwordConfirmation)
         {
             return RedirectToAction("Registration");
+        }
+
+        List<RegistrationEntity> logins = _db.Registration.ToList();
+        for (int i = 0; i < logins.Count; i++)
+        {
+            RegistrationEntity login = logins[i];
+            if (login.PhoneNumber == phoneNumber)
+            {
+                return RedirectToAction("Registration");
+            }
         }
 
         var model = new RegistrationEntity
@@ -128,6 +141,7 @@ public class UploadCVController : Controller
     public IActionResult Login()
     {
         List<RegistrationEntity> logins = _db.Registration.ToList();
+
         for (int i = 0; i < logins.Count; i++)
         {
             RegistrationEntity login = logins[i];
@@ -135,7 +149,22 @@ public class UploadCVController : Controller
             var password = Request.Form["Password"];
             if (login.PhoneNumber == phoneNumber && login.Password == password)
             {
-                return RedirectToAction("Index");
+                if (login.Admin == true)
+                {
+                    Console.WriteLine("cvs");
+                    var cvEntities = _db.CV.ToList();
+                    Console.WriteLine(cvEntities);
+                    foreach (var cv in cvEntities)
+                    {
+                        Console.WriteLine(cv.FirstName);
+                    }
+                    Console.WriteLine($"Retrieved {cvEntities.Count} records.");
+                    return View("Admin", cvEntities);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
         }
         return RedirectToAction("Index", "Home");

@@ -1,0 +1,39 @@
+@model List<CVEntity> 
+
+@{
+    ViewData["Title"] = "CVs";
+}
+
+<div>
+    <h2>Uploaded CVs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Education</th>
+                <th>Gender</th>
+                <th>Skills</th>
+                <th>Experience</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cv in Model)
+            {
+                        <tr>
+                            <td>@cv.FirstName</td>
+                            <td>@cv.LastName</td>
+                            <td>@cv.Email</td>
+                            <td>@cv.PhoneNumber</td>
+                            <td>@cv.Education</td>
+                            <td>@cv.Gender</td>
+                            <td>@cv.Skills</td>
+                            <td>@cv.Experience</td>
+                        </tr>
+                        <br>
+            }
+        </tbody>
+    </table>
+</div>

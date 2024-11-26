@@ -3,41 +3,46 @@
 }
 
 
-<h2>Login</h2>
+<h2>Register</h2>
 
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" asp-controller="UploadCV" asp-action="Register">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input  type="text" name="FirstName" placeholder="Enter your First Name"/>
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input  type="text" name="LastName" placeholder="Enter your LastName"/>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input  type="text" name="Email" placeholder="Enter your Email"/>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input  type="text" name="PhoneNumber" placeholder="Enter your phone number"/>
-                </div>
-                <div class="form-group">
-                    <label>Id Number</label>
-                    <input  type="text" name="IdNumber" placeholder="Enter your Id Number"/>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input  type="text" name="Password" placeholder="Enter your Password"/>
-                </div>
-                <div class="form-group">
-                    <label>Password Confirmation</label>
-                    <input  type="text" name="PasswordConfirmation" placeholder="Enter your Password Confirmation"/>
-                </div>
-                <button type="submit" class="btn btn-primary mt-4">Registration</button>
+                <table >
+                    <tbody>
+                        <tr>
+                            <td><label for="FirstName">First Name</label></td>
+                            <td><input type="text" id="FirstName" name="FirstName" placeholder="Enter your First Name" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="LastName">Last Name</label></td>
+                            <td><input type="text" id="LastName" name="LastName" placeholder="Enter your Last Name" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="Email">Email</label></td>
+                            <td><input type="text" id="Email" name="Email" placeholder="Enter your Email" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="PhoneNumber">Phone Number</label></td>
+                            <td><input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Enter your phone number" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="IdNumber">Id Number</label></td>
+                            <td><input type="text" id="IdNumber" name="IdNumber" placeholder="Enter your Id Number" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="Password">Password</label></td>
+                            <td><input type="password" id="Password" name="Password" placeholder="Enter your Password" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="PasswordConfirmation">Password Confirmation</label></td>
+                            <td><input type="password" id="PasswordConfirmation" name="PasswordConfirmation" placeholder="Enter your Password Confirmation" class="form-control" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-primary mt-4">Register</button>
             </form>
         </div>
     </div>
